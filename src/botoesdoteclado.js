@@ -5,7 +5,7 @@ export default function BotoesDoTeclado(props){
 
     return(
         <div className="teclado">
-            {letras.map((l) => ( <Tecla jogoIniciado={props.jogoIniciado} letra={l}/>
+            {letras.map((l) => ( <Tecla   clicarTecla={props.clicarTecla} jogoIniciado={props.jogoIniciado} letra={l}/>
                 
             ))}
             
@@ -13,8 +13,13 @@ export default function BotoesDoTeclado(props){
     )
 }
 function Tecla(props){
+  
     return(
-    <button className="tecla" disabled={!props.jogoIniciado}>{props.letra}</button>)
+    <button className="tecla" onClick ={() => {
+        props.clicarTecla(props.letra)
+    }} disabled={!props.jogoIniciado}>{props.letra}</button>
+    )
+    
 }
 
 
