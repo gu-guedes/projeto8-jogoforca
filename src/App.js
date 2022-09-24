@@ -14,13 +14,16 @@ export default function App() {
     const [contadorErros, setContadorErros] = React.useState(0)
     const [input , setInput] = React.useState("")
     const [classe, setClasse] = React.useState("palavra-escolhida")
+    const [clicadas, setClicadas] = React.useState([])
 
     
     let listaImagens =["./assets/forca0.png", "./assets/forca1.png", "./assets/forca2.png", "./assets/forca3.png", "./assets/forca4.png", "./assets/forca5.png", "./assets/forca6.png"]   
-    console.log(contadorErros)
+   /*  console.log(contadorErros)
     console.log(palavraArray)
-        console.log(palavraUnderline)
-        console.log(palavraSorteada)
+        console.log(palavraUnderline)*/
+        console.log(palavraSorteada) 
+        
+        console.log(input)
 
     function iniciarJogo() {
         reiniciarJogo()
@@ -48,7 +51,12 @@ export default function App() {
 
     
     }
-    function clicarTecla(letra){
+    function clicarTecla(letra, disabled){
+
+
+       
+        
+        
         
         
         
@@ -108,6 +116,7 @@ export default function App() {
         setPalavraUnderline([])
         setPalavraArray([])
         setContadorErros(0)
+        setClasse("palavra-escolhida")
         
     }
 
@@ -121,15 +130,31 @@ export default function App() {
     }
     perdeuJogo()
 
-    /* function chutarPalavra(){
-        if(palavra do input == palavraSorteada){
-            roda a funçao ganhouJogo
+     function pegarInput(e){
+        setInput(e.target.value)
+       
 
-        }else{
-            setcontadorErros == 6
+        /* if(e.target.value == palavraSorteada && palavraSorteada !== ""){
+            alert('oi')
+    
         }
+     */
+} 
+function chutarPalavra(){
+    if(input == palavraSorteada && palavraSorteada !== ""){
+        setTimeout(() => {setJogoIniciado(false)}, 100)
+            setClasse("palavra-escolhida acertou")
+            setPalavraUnderline(palavraSorteada)
 
-    } */
+    }else{
+        setContadorErros(6)
+    }
+    setInput("")
+}
+
+    
+    
+
     
     
 
@@ -138,7 +163,7 @@ export default function App() {
         <>
             <TelaDoJogo classe={classe} iniciarJogo={iniciarJogo} palavraSorteada={palavraUnderline} imagemForca={listaImagens[contadorErros]}/>
             <BotoesDoTeclado jogoIniciado={jogoIniciado}  clicarTecla={clicarTecla}/>
-            <InputDoChute jogoIniciado={jogoIniciado} />
+            <InputDoChute input={input} jogoIniciado={jogoIniciado} pegarInput={pegarInput} chutarPalavra={chutarPalavra}/>
 
         </>
 

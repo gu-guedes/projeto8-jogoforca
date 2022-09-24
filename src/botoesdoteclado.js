@@ -16,7 +16,7 @@ function Tecla(props){
   
     return(
     <button className="tecla" onClick ={() => {
-        props.clicarTecla(props.letra)
+        props.clicarTecla(props.letra, props.jogoIniciado)
     }} disabled={!props.jogoIniciado}>{props.letra}</button>
     )
     
