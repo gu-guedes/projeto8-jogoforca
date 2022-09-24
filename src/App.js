@@ -10,23 +10,31 @@ export default function App() {
     const [jogoIniciado, setJogoIniciado] = React.useState(false)
     const [palavraSorteada, setPalavraSorteada] = React.useState("")
     const [palavraUnderline, setPalavraUnderline] = React.useState([])
-    const [palavraArray, setPalavraArray] = React.useState("")
+    const [palavraArray, setPalavraArray] = React.useState([])
     const [contadorErros, setContadorErros] = React.useState(0)
+    const [input , setInput] = React.useState("")
+    const [classe, setClasse] = React.useState("palavra-escolhida")
 
     
     let listaImagens =["./assets/forca0.png", "./assets/forca1.png", "./assets/forca2.png", "./assets/forca3.png", "./assets/forca4.png", "./assets/forca5.png", "./assets/forca6.png"]   
     console.log(contadorErros)
+    console.log(palavraArray)
+        console.log(palavraUnderline)
+        console.log(palavraSorteada)
 
     function iniciarJogo() {
+        reiniciarJogo()
+        
 
         setJogoIniciado(true)
 
         const indicePalavra = Math.floor(Math.random() * palavras.length);
 
-        const palavraSorteada = palavras[indicePalavra]
+        let palavraSorteada = palavras[indicePalavra]
 
 
         setPalavraSorteada(palavraSorteada)
+        
         
 
         let palavraArray = palavraSorteada.split('')
@@ -41,8 +49,7 @@ export default function App() {
     
     }
     function clicarTecla(letra){
-        console.log(palavraArray)
-        console.log(palavraUnderline)
+        
         
         
        let verificaLetra = palavraArray.includes(letra)
@@ -77,12 +84,59 @@ export default function App() {
         console.log(letra) 
 
     }
-    console.log(contadorErros)
+
+    function GanhouJogo(){
+        let palavraArrayString = palavraArray.toString() 
+        
+        let palavraUnderlineString = palavraUnderline.toString()
+        
+        if(palavraArrayString === palavraUnderlineString && palavraArrayString !== "" && classe !== "palavra-escolhida acertou"){
+            //quero add classname acertou
+            setTimeout(() => {setJogoIniciado(false)}, 100)
+            setClasse("palavra-escolhida acertou")
+            
+        }
+        //quando palavraArray == palavraUnderline > palavraUnderline/palavra-escolhida muda css
+        //jogoIniciado == false
+        
+    }
+    GanhouJogo()
+
+    function reiniciarJogo(){
+        setJogoIniciado(true)
+        setPalavraSorteada("")
+        setPalavraUnderline([])
+        setPalavraArray([])
+        setContadorErros(0)
+        
+    }
+
+    function perdeuJogo(){
+        if(contadorErros == 6 && classe !== "palavra-escolhida errou"){
+            setTimeout(() => {setJogoIniciado(false)}, 100)
+            setClasse("palavra-escolhida errou")
+            setPalavraUnderline(palavraSorteada)
+
+        }
+    }
+    perdeuJogo()
+
+    /* function chutarPalavra(){
+        if(palavra do input == palavraSorteada){
+            roda a funçao ganhouJogo
+
+        }else{
+            setcontadorErros == 6
+        }
+
+    } */
+    
+    
 
 
     return (
         <>
-            <TelaDoJogo iniciarJogo={iniciarJogo} palavraSorteada={palavraUnderline} imagemForca={listaImagens[contadorErros]}/>
+            <TelaDoJogo classe={classe} iniciarJogo={iniciarJogo} palavraSorteada={palavraUnderline} imagemForca={listaImagens[contadorErros]}/>
             <BotoesDoTeclado jogoIniciado={jogoIniciado}  clicarTecla={clicarTecla}/>
             <InputDoChute jogoIniciado={jogoIniciado} />
 

@@ -8,7 +8,7 @@ export default function TelaDoJogo(props){
             <img src={props.imagemForca}/>
             <div className="lado-direito">
             <button onClick={props.iniciarJogo} className="escolher-palavra">Escolher Palavra</button>
-            <div className="palavra-escolhida">{props.palavraSorteada}</div>
+            <div className={props.classe}>{props.palavraSorteada}</div>
             </div>
         </div>
     )

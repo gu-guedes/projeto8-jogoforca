@@ -28,6 +28,13 @@
     
     width: auto;
     height: 50px;
+    font-size: 30px
+}
+.acertou{
+    color: rgb(6, 201, 6)
+}
+.errou{
+    color:red;
 }
 .teclado{
     
