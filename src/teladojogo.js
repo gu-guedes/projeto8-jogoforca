@@ -1,14 +1,14 @@
 
 
 export default function TelaDoJogo(props){
-    console.log(props)
+
     
     return (
         <div className="tela-jogo">
-            <img src={props.imagemForca}/>
+            <img data-identifier="game-image" src={props.imagemForca}/>
             <div className="lado-direito">
-            <button onClick={props.iniciarJogo} className="escolher-palavra">Escolher Palavra</button>
-            <div className={props.classe}>{props.palavraSorteada}</div>
+            <button data-identifier="choose-word" onClick={props.iniciarJogo} className="escolher-palavra">Escolher Palavra</button>
+            <div data-identifier="word" className={props.classe}>{props.palavraSorteada}</div>
             </div>
         </div>
     )
